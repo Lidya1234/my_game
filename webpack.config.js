@@ -1,5 +1,6 @@
 const path = require('path');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
@@ -13,6 +14,16 @@ module.exports = {
 
   module: {
     rules: [
+        {
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader'],
+          },
+
+          {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
+          },
+
         {
             test: /\.js$/,
             exclude: /(node_modules)/, // Set loaders to transform files.
@@ -32,6 +43,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
     }),
+
+    new webpack.DefinePlugin({
+        'typeof CANVAS_RENDERER': JSON.stringify(true),
+        'typeof WEBGL_RENDERER': JSON.stringify(true)
+      })
   ],
 
   devServer: {

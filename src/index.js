@@ -1,8 +1,11 @@
-import { showMessage } from './messager';
+import 'phaser';
 
-showMessage('Somebody else did this work!');
+import { SimpleScene } from './scenes/simple-scene';
 
+const gameConfig = {
+  width: 680,
+  height: 400,
+  scene: SimpleScene
+};
 
-const messageEl = document.createElement('div');
-messageEl.textContent = 'I was put here by JavaScript!';
-document.body.appendChild(messageEl);
+new Phaser.Game(gameConfig);
